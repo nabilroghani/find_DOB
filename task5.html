@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Find DOB</title>
+</head>
+
+<body>
+  <script>
+    const dob = prompt("Enter Your Date of Birth (YYYY-MM-DD): ");
+    const birthDate = new Date(dob);
+    const today = new Date();
+    if (isNaN(birthDate.getTime()) || birthDate > today) {
+      alert("Please Enter a valid date of birth in the past.");
+
+    } else {
+      let year = today.getFullYear() - birthDate.getFullYear();
+      let mnth = today.getMonth() - birthDate.getMonth();
+      let day = today.getDate() - birthDate.getDate();
+
+      if (mnth < 0 || (mnth === 0 && day < 0)) {
+        year--;
+        mnth += (day < 0) ? 11 : 12;
+      }
+      if (day < 0) {
+        const premnth = new Date(today.getFullYear(), today.getMonth(), 0);
+        day += premnth.getDate();
+      }
+
+      const result = `You are ${year} years, ${mnth} months and ${day} days old.`;
+      console.log(result);
+      alert(result);
+
+    }
+
+  </script>
+
+</body>
+
+</html>
